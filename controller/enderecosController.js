@@ -1,13 +1,19 @@
 const pool = require('../config/db')
 
+function formataCEP(cep) {
+    if(cep.length === 8){
+        return cep.slice(0, 5) + '-' + cep.slice(5);
+    }
+    return cep;
+}
+
 exports.criarEndereco = async (req, res) => {
     const {rua, cep, bairro, cidade, estado, pais} = req.body
-    const enderecoCompleto = `${rua}, ${bairro}, ${cidade} ${cep} - ${estado} , ${pais}`
     
     try {
         const result = await pool.query(
-        `INSERT INTO enderecos (enderecoCompleto, rua, cep, bairro, cidade, estado, pais) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
-        [enderecoCompleto, rua, cep, bairro, cidade, estado, pais]
+        `INSERT INTO enderecos (rua, cep, bairro, cidade, estado, pais) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
+        [rua, formataCEP(cep), bairro, cidade, estado, pais]
     )
     res.status(201).json(result.rows[0])
     } catch (error) {
@@ -34,5 +40,33 @@ exports.buscarEndereco = async (req, res) => {
     } catch (error) {
         console.log(error)
         res.status(500).json({Message: "Impossivel listar endereco"})
+    }
+}
+
+exports.atualizarEndereco = async (req, res) => {
+    const {campo, valor, id} = req.body
+    console.log(req.body)
+
+    try {
+        const result = await pool.query(
+            `UPDATE ENDERECOS Set %${campo}% = ${valor} WHERE ID = ${id}`
+        )
+        res.status(201).json(result.rows[0])
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({Message: "Impossivel atualizar endereco"})
+    }
+}
+
+
+exports.deletarEndereco = async (req, res) => {
+    const {id} = req.body
+
+    try {
+        const result = await pool.query(`UPDATE ENDERECOS Set = %${busca}% WHERE ID = ${id}`)
+        res.status(201).json(result.rows[0])
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({Message: "Impossivel atualizar endereco"})
     }
 }
