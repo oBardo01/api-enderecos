@@ -24,8 +24,8 @@ exports.criarEndereco = async (req, res) => {
 
 exports.listarTodosOsEnderecos = async (req, res) => {
     try {
-        const result = await pool.query(`SELECT * FROM ENDERECOS`)
-        res.status(201).json(result.rows[0])
+        const result = await pool.query(`SELECT id, enderecoCompleto FROM ENDERECOS`)
+        res.status(201).json(result.rows)
     } catch (error) {
         console.log(error)
         res.status(500).json({Message: "Impossivel listar enderecos"})
@@ -33,10 +33,12 @@ exports.listarTodosOsEnderecos = async (req, res) => {
 }
 
 exports.buscarEndereco = async (req, res) => {
-    const {busca} = req.params
+    const {busca} = req.params.query
 
     try {
-        const result = await pool.query(`SELECT * FROM ENDERECOS WHERE enderecoCompleto = %${busca}%`)
+        const result = await pool.query(`SELECT id, enderecoCompleto FROM ENDERECOS WHERE enderecoCompleto ilike $1`,
+        [`%${busca}%`]
+        )
     } catch (error) {
         console.log(error)
         res.status(500).json({Message: "Impossivel listar endereco"})
