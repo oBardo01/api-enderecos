@@ -36,7 +36,7 @@ exports.buscarEndereco = async (req, res) => {
     const {busca} = req.query
 
     if(!busca) {
-        return res.status(400).json({message: "o parametro é obrigatório"})
+        return res.status(400).json({message: "O parâmetro é obrigatório"})
     }
 
     try {
@@ -45,7 +45,31 @@ exports.buscarEndereco = async (req, res) => {
         )
 
         if (result.rows.length === 0) {
-            return res.status(404).json({ message: "Nenhum endereço encontrado." });
+            return res.status(404).json({ message: "Nenhum endereço encontrado" });
+        }
+
+        res.json(result.rows)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({Message: "Impossivel listar endereco"})
+    }
+}
+
+exports.buscarEnderecoFiltrado = async (req, res) => {
+    const {filtro} = req.params.filtro
+    const {busca} = req.query
+
+    if(!busca) {
+        return res.status(400).json({message: "O parâmetro é obrigatório"})
+    }
+
+    try {
+        const result = await pool.query(`SELECT id, enderecoCompleto, $1 FROM ENDERECOS WHERE $2 ilike $3`,
+        [filtro, filtro, `%${busca}%`]
+        )
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ message: "Nenhum endereço encontrado" });
         }
 
         res.json(result.rows)
@@ -69,7 +93,6 @@ exports.atualizarEndereco = async (req, res) => {
         res.status(500).json({Message: "Impossivel atualizar endereco"})
     }
 }
-
 
 exports.deletarEndereco = async (req, res) => {
     const {id} = req.body

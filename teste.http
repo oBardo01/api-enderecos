@@ -1,1 +1,1 @@
-GET http://localhost:5000/api/enderecos/busca?busca=Praça da Sé
+GET http://localhost:5000/api/enderecos/buscar/id?

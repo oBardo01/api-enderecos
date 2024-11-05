@@ -4,7 +4,8 @@ const enderecosController = require('../controller/enderecosController.js')
 
 router.post('/', enderecosController.criarEndereco);
 router.get('/listar', enderecosController.listarTodosOsEnderecos);
-router.get('/busca', enderecosController.buscarEndereco);
+router.get('/buscar', enderecosController.buscarEndereco);
+router.get('/buscar/:filtro', enderecosController.buscarEnderecoFiltrado);
 router.put('/atualizar/:id', enderecosController.atualizarEndereco);
 router.delete('/deletar/:id', enderecosController.deletarEndereco);
 
