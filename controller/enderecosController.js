@@ -33,12 +33,22 @@ exports.listarTodosOsEnderecos = async (req, res) => {
 }
 
 exports.buscarEndereco = async (req, res) => {
-    const {busca} = req.params.query
+    const {busca} = req.query
+
+    if(!busca) {
+        return res.status(400).json({message: "o parametro é obrigatório"})
+    }
 
     try {
         const result = await pool.query(`SELECT id, enderecoCompleto FROM ENDERECOS WHERE enderecoCompleto ilike $1`,
         [`%${busca}%`]
         )
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ message: "Nenhum endereço encontrado." });
+        }
+
+        res.json(result.rows)
     } catch (error) {
         console.log(error)
         res.status(500).json({Message: "Impossivel listar endereco"})
