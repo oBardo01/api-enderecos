@@ -7,7 +7,7 @@ function formataCEP(cep) {
     return cep;
 }
 
-exports.criarEndereco = async (req, res) => {
+exports.criarEndereco = async (req, res) => {          // Rota para cirar endereço 👍
     const {rua, cep, bairro, cidade, estado, pais} = req.body
     
     try {
@@ -22,7 +22,7 @@ exports.criarEndereco = async (req, res) => {
     }
 }
 
-exports.listarTodosOsEnderecos = async (req, res) => {
+exports.listarTodosOsEnderecos = async (req, res) => {          // Rota para listar todos os endereços 👍
     try {
         const result = await pool.query(`SELECT id, enderecoCompleto FROM ENDERECOS`)
         res.status(201).json(result.rows)
@@ -32,7 +32,7 @@ exports.listarTodosOsEnderecos = async (req, res) => {
     }
 }
 
-exports.buscarEndereco = async (req, res) => {
+exports.buscarEndereco = async (req, res) => {          // Rota para fazer uma busca de endereço 👍
     const {busca} = req.query
 
     if(!busca) {
@@ -55,17 +55,20 @@ exports.buscarEndereco = async (req, res) => {
     }
 }
 
-exports.buscarEnderecoFiltrado = async (req, res) => {
-    const {filtro} = req.params.filtro
+exports.buscarEnderecoFiltrado = async (req, res) => {          // Rota para buscar endereço filtrado 👍
+    const {filtro} = req.params
     const {busca} = req.query
+
+    console.log('Filtro recebido:', filtro);
+    console.log('Busca recebida:', busca);
 
     if(!busca) {
         return res.status(400).json({message: "O parâmetro é obrigatório"})
     }
 
     try {
-        const result = await pool.query(`SELECT id, enderecoCompleto, $1 FROM ENDERECOS WHERE $2 ilike $3`,
-        [filtro, filtro, `%${busca}%`]
+        const result = await pool.query(`SELECT enderecoCompleto FROM ENDERECOS WHERE ${filtro} ilike $1`,
+        [`%${busca}%`]
         )
 
         if (result.rows.length === 0) {
@@ -79,18 +82,20 @@ exports.buscarEnderecoFiltrado = async (req, res) => {
     }
 }
 
-exports.atualizarEndereco = async (req, res) => {
-    const {campo, valor, id} = req.body
+exports.atualizarEndereco = async (req, res) => {           // Rota para atualizar os dados de um endereço 👍
+    const {id} = req.params
+    const {campo, valor} = req.body
     console.log(req.body)
 
     try {
         const result = await pool.query(
-            `UPDATE ENDERECOS Set %${campo}% = ${valor} WHERE ID = ${id}`
+            `UPDATE ENDERECOS Set ${campo} = $1 WHERE id = $2`,
+            [valor, id]
         )
         res.status(201).json(result.rows[0])
     } catch (error) {
         console.log(error)
-        res.status(500).json({Message: "Impossivel atualizar endereco"})
+        res.status(500).json({Message: "Impossivel ele endereco"})
     }
 }
 

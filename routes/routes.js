@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const enderecosController = require('../controller/enderecosController.js')
 
-router.post('/', enderecosController.criarEndereco);
+router.post('/criarEndereco', enderecosController.criarEndereco);
 router.get('/listar', enderecosController.listarTodosOsEnderecos);
 router.get('/buscar', enderecosController.buscarEndereco);
 router.get('/buscar/:filtro', enderecosController.buscarEnderecoFiltrado);

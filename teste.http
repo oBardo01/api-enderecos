@@ -1,1 +1,47 @@
-GET http://localhost:5000/api/enderecos/buscar/id?
+POST http://localhost:5000/api/enderecos/criarEndereco
+Content-Type: application/json
+
+{
+    "rua": "",
+    "cep": "",
+    "bairro": "",
+    "cidade": "",
+    "estado": "",
+    "pais": ""
+}
+# ROTA DE CRIAR ENDEREÇO
+
+###
+
+GET http://localhost:5000/api/enderecos/listar
+#ROSTA DE LISTAR OS ENDEREÇOS
+###
+
+
+GET http://localhost:5000/api/enderecos/buscar/cidade?busca=Salvador 
+# ROTA DE BUSCA COM FILTRO POR COLUNA - Ex: Quero buscar todas as cidades de salvador /buscar/cidade?busca=Salvador
+
+###
+
+
+GET http://localhost:5000/api/enderecos/buscar?busca=Pr
+# ROTA DE BUSCA - /buscar?busca=(busca desejada)
+
+###
+
+
+PUT http://localhost:5000/api/enderecos/atualizar/36
+Content-Type: application/json
+
+{
+    "campo": "bairro",
+    "valor": "itaquera"
+}
+# ROTA DE ATUALIZAR - /atualizar/:id e no corpo da requisição um json contendo o campo (coluna a ser alterada) valor novo
+
+###
+
+
+DELETE http://localhost:5000/api/enderecos/deletar/36
+# ROTA DE DELETAR - /deletar/:id
+###
