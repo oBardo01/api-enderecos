@@ -99,7 +99,7 @@ exports.atualizarEndereco = async (req, res) => {           // Rota para atualiz
     }
 }
 
-exports.deletarEndereco = async (req, res) => {
+exports.deletarEndereco = async (req, res) => {             // Rota para deletar um endereço 👍
     const {id} = req.body
 
     try {
