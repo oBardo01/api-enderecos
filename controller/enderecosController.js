@@ -55,6 +55,27 @@ exports.buscarEndereco = async (req, res) => {          // Rota para fazer uma b
     }
 }
 
+exports.buscarEnderecoPorId = async (req, res) => {          // Rota para buscar endereço pelo ID 👍
+    const {id} = req.params
+
+    console.log('Filtro recebido:', id);
+
+    try {
+        const result = await pool.query(`SELECT enderecoCompleto FROM ENDERECOS WHERE id ilike $1`,
+        [id]
+        )
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ message: "Nenhum endereço encontrado" });
+        }
+
+        res.json(result.rows)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({Message: "Impossivel listar endereco"})
+    }
+}
+
 exports.buscarEnderecoFiltrado = async (req, res) => {          // Rota para buscar endereço filtrado 👍
     const {filtro} = req.params
     const {busca} = req.query
