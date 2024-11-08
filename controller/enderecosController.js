@@ -110,8 +110,8 @@ exports.atualizarEndereco = async (req, res) => {           // Rota para atualiz
 
     try {
         const result = await pool.query(
-            `UPDATE ENDERECOS Set ${campo} = $1 WHERE id = $2`,
-            [valor, id]
+            `UPDATE ENDERECOS Set $1 = $2 WHERE id = $3`,
+            [campo, valor, id]
         )
         res.status(201).json(result.rows[0])
     } catch (error) {
