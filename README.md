@@ -45,12 +45,14 @@ AVISO: Para rodar todas as rotas conforme o funcionamento, certifique-se do cami
         "id": 1,
         "enderecocompleto": "Rua da Independência, Centro, São Paulo, SP, Brasil, CEP: 01045-000"
       }`.
+
+
  
  -  GET /buscar
 
    A rota de busca padrão permite encontrar endereços a partir do endereço completo, então, pode ser digitada na busca de query qualquer parte do endereço desejada, como o nome de uma cidade, ou uma rua, até um CEP, que será feita uma busca geral (OBS. a coluna enderecoCompleto é uma concatenação das outras colunas gerando uma coluna automática de todas as outras colunas do endereço, exceto o ID). a busca é realizada com query parameters, onde após a busca, DEVE-SE, utilizar o parametro de query ?busca=****
-   - Exexmplo de busca: `https://api-enderecos-no7f.onrender.com/api/enderecos/buscar?busca=Salvador`
-   - Ex. de retorno da busca:
+    - Exexmplo de busca: `https://api-enderecos-no7f.onrender.com/api/enderecos/buscar?busca=Salvador`
+    - Ex. de retorno da busca:
      `[
        {
         "id": 16,
@@ -74,12 +76,13 @@ AVISO: Para rodar todas as rotas conforme o funcionamento, certifique-se do cami
        }
       ]`
 
+
      
  - GET /buscarPorFiltro/:filtro
 
   Está rota, não fugindo do propósito da anterior, serve para realizar uma busca com um filtro, para caso quiser realizar uma busca de endereços de uma mesma rua, cidade, bairro, estado, etc.
-  - Ex. de uso: `https://api-enderecos-no7f.onrender.com/api/enderecos/buscarPorFiltro/cidade?busca=Salvador`
-  - Ex. de retorno:
+    - Ex. de uso: `https://api-enderecos-no7f.onrender.com/api/enderecos/buscarPorFiltro/cidade?busca=Salvador`
+    - Ex. de retorno:
      `[
        {
         "id": 16,
