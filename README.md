@@ -33,16 +33,20 @@ Para inicar API, execute o script configurado no seu package.json, como por exem
 
 ### ROTAS e FUNCIONALIDADES
 AVISO: Para rodar todas as rotas conforme o funcionamento, certifique-se do caminho antes dos seguintes estar em:
+
 `https://api-enderecos-no7f.onrender.com/api/enderecos`
 
  - GET /listar
+   
    Rota para listar todos os endereços cadastrados. O retorno vem em uma array de objetos, sendo respectivamente cada objeto um endereço, com os campos:
    id, endereçoCompleto, rua, bairro, cidade, estado, país, cep. Ao executar listar, o retorno vai retornar por padrão o id e o endereçoCompleto de todos os endereços.
-
    - EX:
      `{
         "id": 1,
         "enderecocompleto": "Rua da Independência, Centro, São Paulo, SP, Brasil, CEP: 01045-000"
       }`.
+ 
+ -  GET /busca
 
-  - 
+   A rota de busca padrão permite encontrar endereços a partir do endereço completo, então, pode ser digitada na busca de query qualquer parte do endereço desejada, como o nome de uma cidade, ou uma rua, até um CEP, que será feita uma busca geral (OBS. a coluna enderecoCompleto é uma concatenação das outras colunas gerando uma coluna automática de todas as outras colunas do endereço, exceto o ID).
+   -
