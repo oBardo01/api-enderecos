@@ -6,7 +6,7 @@ const useRoutes = require('./routes/routes')
 app.use(express.json())
 app.use('/api/enderecos', useRoutes)
 
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 10000
 app.listen(PORT, ()=>{
     console.log(`Servidor subiu em ${PORT}`)
 });
