@@ -2,6 +2,7 @@
 # API ENDEREÇOS - PEDRO ABREU
 
 Uma simples API feita com o objetivo de testes de prática com CRUD, Deploy, e criação de Banco de Dados em Nuvem.
+Este simples trabalho acadêmico me ajudou a melhorar na criação e entendimento sobre APIs REST, Roteamentos e frameworks Express, Deploy e Controle de Versão. é isso, aproveite!
 :D
 
 ## INSTALAÇÃO
