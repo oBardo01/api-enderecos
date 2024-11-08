@@ -61,7 +61,7 @@ exports.buscarEnderecoPorId = async (req, res) => {          // Rota para buscar
     console.log('Filtro recebido:', id);
 
     try {
-        const result = await pool.query(`SELECT enderecoCompleto FROM ENDERECOS WHERE id = $1`,
+        const result = await pool.query(`SELECT id, enderecoCompleto FROM ENDERECOS WHERE id = $1`,
         [id]
         )
 
