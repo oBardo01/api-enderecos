@@ -75,7 +75,7 @@ AVISO: Para rodar todas as rotas conforme o funcionamento, certifique-se do cami
       ]`
 
      
-- GET /buscarPorFiltro/:filtro
+ - GET /buscarPorFiltro/:filtro
 
   Está rota, não fugindo do propósito da anterior, serve para realizar uma busca com um filtro, para caso quiser realizar uma busca de endereços de uma mesma rua, cidade, bairro, estado, etc.
   - Ex. de uso: `https://api-enderecos-no7f.onrender.com/api/enderecos/buscarPorFiltro/cidade?busca=Salvador`
