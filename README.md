@@ -23,6 +23,21 @@ Para fazer esta API rodar, configure as variáveis ambientes no arquivo .env ou 
 `PORT = ****
 DATABASE_URL = ******`
 
+- RECOMENDAÇÃO
+
+  abaixo disponível o código da criação da tabela que utilizei na API:
+  ```sql
+  CREATE TABLE enderecos (
+    id SERIAL PRIMARY KEY,
+    rua VARCHAR(200) NOT NULL,
+    bairro VARCHAR(100) NOT NULL,
+    cidade VARCHAR(100) NOT NULL,
+    cep CHAR(9) NOT NULL,
+    estado VARCHAR(100) NOT NULL,
+    pais VARCHAR(100) NOT NULL,
+    enderecoCompleto VARCHAR(600) GENERATED ALWAYS AS 
+        (rua || ', ' || bairro || ', ' || cidade || ', ' || estado || ', ' || pais || ', CEP: ' || cep) STORED
+   );
 
 ## USO 
 
